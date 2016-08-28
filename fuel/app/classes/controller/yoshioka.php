@@ -64,7 +64,7 @@ class Controller_Yoshioka extends Controller_Base
 		$users = DB::select('*')
 			->from('users')
 			->where('user_name', '<>', '')
-			->where('last_access_at', '>=', strftime('%F %T', strtotime('-1 hour', $_SERVER['REQUEST_TIME'])))
+			//->where('last_access_at', '>=', strftime('%F %T', strtotime('-1 hour', $_SERVER['REQUEST_TIME'])))
 			->where('id', '<>', $this->me['id'])
 			->and_where_open()
 				->or_where_open()
