@@ -6,9 +6,18 @@
 			<th>出身地</th>
 			<th>学歴</th>
 			<th>仕事</th>
+			<th>趣味</th>
 		</tr>
 	</thead>
 	<tbody>
+		<tr>
+			<th scope="row"><?php echo $me['user_name']; ?></th>
+			<td><?php echo $me['user_age']; ?></td>
+			<td><?php echo $me['user_shusshin']; ?></td>
+			<td><?php echo $me['user_gakureki']; ?></td>
+			<td><?php echo $me['user_shigoto']; ?></td>
+			<td><?php echo $me['user_shumi']; ?></td>
+		</tr>
 		<tr v-for="user in users">
 			<th scope="row">{{ user.user_name }}</th>
 			<td v-bind:class="{ 'success': (user.user_age == '<?php echo $me['user_age']; ?>') }">{{ (user.user_age == '<?php echo $me['user_age']; ?>' ? user.user_age : '-') }}</td>
