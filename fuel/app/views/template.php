@@ -7,7 +7,7 @@
 	<?php echo Asset::css('custom.css'); ?>
 </head>
 <body>
-<header>
+<header class="header">
 	<?php echo $header; ?>
 </header>
 <div class="container">
@@ -15,7 +15,7 @@
 		<?php echo $content; ?>
 	</div>
 </div>
-<footer>
+<footer class="footer">
 	<?php echo $footer; ?>
 </footer>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
