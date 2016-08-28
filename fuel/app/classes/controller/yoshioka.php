@@ -12,6 +12,9 @@ class Controller_Yoshioka extends Controller_Base
 			$data = array(
 				'user_name' => '',
 				'user_age' => '',
+				'user_shusshin' => '',
+				'user_gakureki' => '',
+				'user_shigoto' => '',
 				'created_at' => strftime('%F %T', $_SERVER['REQUEST_TIME']),
 				'updated_at' => strftime('%F %T', $_SERVER['REQUEST_TIME']),
 			);
@@ -19,6 +22,7 @@ class Controller_Yoshioka extends Controller_Base
 
 			$this->set_session($insert_id);
 		}
+
 		$this->me = Session::get('me');
 	}
 
@@ -38,9 +42,13 @@ class Controller_Yoshioka extends Controller_Base
 		$users = DB::select('*')
 			->from('users')
 			->where('user_name', '<>', '')
+			->where('last_access_at', '>=', strftime('%F %T', strtotime('-1 minute', $_SERVER['REQUEST_TIME'])))
 			->where('id', '<>', $this->me['id'])
 			->and_where_open()
 				->or_where('user_age', '=', $this->me['user_age'])
+				->or_where('user_shusshin', '=', $this->me['user_shusshin'])
+				->or_where('user_gakureki', '=', $this->me['user_gakureki'])
+				->or_where('user_shigoto', '=', $this->me['user_shigoto'])
 			->and_where_close()
 			->execute()
 			->as_array();
@@ -71,10 +79,14 @@ class Controller_Yoshioka extends Controller_Base
 		$data = array(
 			'user_name' => Input::post('user_name'),
 			'user_age' => Input::post('user_age'),
+			'user_shusshin' => Input::post('user_shusshin'),
+			'user_gakureki' => Input::post('user_gakureki'),
+			'user_shigoto' => Input::post('user_shigoto'),
+			'updated_at' => strftime('%F %T', $_SERVER['REQUEST_TIME']),
 		);
 		DB::update('users')->set($data)->where('id', $this->me['id'])->execute();
 
-		Session::set_flash('success', '編集しました');
+		Session::set_flash('success', 'プロフィールを更新しました');
 
 		$this->set_session($this->me['id']);
 
@@ -90,11 +102,17 @@ class Controller_Yoshioka extends Controller_Base
 
 	public function set_session($id)
 	{
+		$data = array(
+			'last_access_at' => strftime('%F %T', $_SERVER['REQUEST_TIME']),
+		);
+		DB::update('users')->set($data)->where('id', $id)->execute();
+
 		$users = DB::select('*')
 			->from('users')
 			->where('id', $id)
 			->execute()
 			->as_array();
+
 		if (count($users)) {
 			Session::set('me', $users[0]);
 		}

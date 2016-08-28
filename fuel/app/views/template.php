@@ -7,6 +7,8 @@
 	<title>であっちんぐ</title>
 	<?php echo Asset::css('bootstrap.css'); ?>
 	<?php echo Asset::css('custom.css'); ?>
+	<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+	<?php echo Asset::js('bootstrap.min.js'); ?>
 </head>
 <body>
 <header class="header">
@@ -20,8 +22,5 @@
 <footer class="footer">
 	<?php echo $footer; ?>
 </footer>
-<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="//cdn.jsdelivr.net/vue/1.0.26/vue.min.js"></script>
-<?php echo Asset::js('bootstrap.min.js'); ?>
 </body>
 </html>
