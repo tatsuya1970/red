@@ -26,6 +26,13 @@ class Controller_Yoshioka extends Controller_Base
 	{
 		$view = View::forge('yoshioka/index');
 
+		$this->template->content = $view;
+	}
+
+	public function action_search()
+	{
+		$view = View::forge('yoshioka/search');
+
 		$users = DB::select('*')
 			->from('users')
 			->where('id', '<>', $this->me['id'])

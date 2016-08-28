@@ -11,7 +11,7 @@
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="<?php echo Uri::create('logout'); ?>"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+				<li><a href="<?php echo Uri::create('logout'); ?>">Logout</a></li>
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>
