@@ -64,14 +64,29 @@ class Controller_Yoshioka extends Controller_Base
 		$users = DB::select('*')
 			->from('users')
 			->where('user_name', '<>', '')
-			->where('last_access_at', '>=', strftime('%F %T', strtotime('-1 minute', $_SERVER['REQUEST_TIME'])))
+			->where('last_access_at', '>=', strftime('%F %T', strtotime('-1 hour', $_SERVER['REQUEST_TIME'])))
 			->where('id', '<>', $this->me['id'])
 			->and_where_open()
-				->or_where('user_age', '=', $this->me['user_age'])
-				->or_where('user_shusshin', '=', $this->me['user_shusshin'])
-				->or_where('user_gakureki', '=', $this->me['user_gakureki'])
-				->or_where('user_shigoto', '=', $this->me['user_shigoto'])
-				->or_where('user_shumi', '=', $this->me['user_shumi'])
+				->or_where_open()
+					->where('user_age', '=', $this->me['user_age'])
+					->where('user_age', '<>', '')
+				->or_where_close()
+				->or_where_open()
+					->where('user_shusshin', '=', $this->me['user_shusshin'])
+					->where('user_shusshin', '<>', '')
+				->or_where_close()
+				->or_where_open()
+					->where('user_gakureki', '=', $this->me['user_gakureki'])
+					->where('user_gakureki', '<>', '')
+				->or_where_close()
+				->or_where_open()
+					->where('user_shigoto', '=', $this->me['user_shigoto'])
+					->where('user_shigoto', '<>', '')
+				->or_where_close()
+				->or_where_open()
+					->where('user_shumi', '=', $this->me['user_shumi'])
+					->where('user_shumi', '<>', '')
+				->or_where_close()
 			->and_where_close()
 			->execute()
 			->as_array();
@@ -115,7 +130,7 @@ class Controller_Yoshioka extends Controller_Base
 
 		$this->set_session($this->me['id']);
 
-		return Response::redirect('profile');
+		return Response::redirect('search');
 	}
 
 	public function action_logout()
