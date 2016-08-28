@@ -1,5 +1,5 @@
 <?php
-class Controller_Yoshioka extends Controller
+class Controller_Yoshioka extends Controller_Base
 {
 	/**
 	 * データベース接続テスト
@@ -15,6 +15,6 @@ class Controller_Yoshioka extends Controller
 
 		$view->set('users', $users);
 
-		return Response::forge($view);
+		$this->template->content = $view;
 	}
 }

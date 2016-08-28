@@ -1,5 +1,5 @@
 <?php
-class Controller_Facebook extends Controller
+class Controller_Facebook extends Controller_Base
 {
 	/**
 	 * facebook
@@ -14,6 +14,6 @@ class Controller_Facebook extends Controller
 		$test = '変数をViewsに渡すテスト';
 		$view->set('test', $test);
 
-		return Response::forge($view);
+		$this->template->content = $view;
 	}
 }
