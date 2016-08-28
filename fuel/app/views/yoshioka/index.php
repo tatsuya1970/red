@@ -11,11 +11,11 @@
 	<tbody>
 		<?php foreach ($users as $user): ?>
 			<tr>
-				<th scope="row"><?php echo $user->id; ?></th>
-				<td><?php echo $user->user_name; ?></td>
-				<td><?php echo $user->user_age; ?></td>
-				<td><?php echo $user->created_at; ?></td>
-				<td><?php echo $user->updated_at; ?></td>
+				<th scope="row"><?php echo $user['id']; ?></th>
+				<td><?php echo $user['user_name']; ?></td>
+				<td><?php echo $user['user_age']; ?></td>
+				<td><?php echo $user['created_at']; ?></td>
+				<td><?php echo $user['updated_at']; ?></td>
 			</tr>
 		<?php endforeach; ?>
 	</tbody>
