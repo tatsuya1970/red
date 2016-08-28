@@ -21,9 +21,11 @@
 	</tbody>
 </table>
 <script>
+/*
 $(function() {
 	window.setTimeout(function() {
 		window.location.reload();
 	}, 3000);
 });
+*/
 </script>

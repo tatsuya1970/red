@@ -24,6 +24,15 @@ class Controller_Yoshioka extends Controller_Base
 		}
 
 		$this->me = Session::get('me');
+
+		if (is_array($this->me)) {
+			if ($this->me['id']) {
+				$data = array(
+					'last_access_at' => strftime('%F %T', $_SERVER['REQUEST_TIME']),
+				);
+				DB::update('users')->set($data)->where('id', $this->me['id'])->execute();
+			}
+		}
 	}
 
 	public function action_index()
@@ -38,6 +47,11 @@ class Controller_Yoshioka extends Controller_Base
 	public function action_search()
 	{
 		$view = View::forge('yoshioka/search');
+
+		if ($this->me['user_name'] == '') {
+			Session::set_flash('firsttime', 'まずはプロフィールを登録してください');
+			return Response::redirect('profile');
+		}
 
 		$users = DB::select('*')
 			->from('users')
@@ -65,6 +79,9 @@ class Controller_Yoshioka extends Controller_Base
 	public function action_profile()
 	{
 		$view = View::forge('yoshioka/profile');
+
+		$firsttime = Session::get_flash('firsttime');
+		$view->set('firsttime', $firsttime);
 
 		$success = Session::get_flash('success');
 		$view->set('success', $success);
@@ -102,11 +119,6 @@ class Controller_Yoshioka extends Controller_Base
 
 	public function set_session($id)
 	{
-		$data = array(
-			'last_access_at' => strftime('%F %T', $_SERVER['REQUEST_TIME']),
-		);
-		DB::update('users')->set($data)->where('id', $id)->execute();
-
 		$users = DB::select('*')
 			->from('users')
 			->where('id', $id)

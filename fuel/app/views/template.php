@@ -19,8 +19,10 @@
 		<?php echo $content; ?>
 	</div>
 </div>
+<!--
 <footer class="footer">
 	<?php echo $footer; ?>
 </footer>
+-->
 </body>
 </html>

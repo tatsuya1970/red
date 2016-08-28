@@ -1,7 +1,13 @@
+<?php if ($firsttime): ?>
+	<div class="alert alert-info" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<?php echo $firsttime; ?>
+	</div>
+<?php endif; ?>
 <?php if ($success): ?>
 	<div class="alert alert-success" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<strong>Success!</strong> <?php echo $success; ?>
+		<?php echo $success; ?>
 	</div>
 <?php endif; ?>
 <?php echo Form::open(array('action' => 'profile_edit', 'class'=>'form-group')); ?>
