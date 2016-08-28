@@ -53,6 +53,13 @@ class Controller_Yoshioka extends Controller_Base
 			return Response::redirect('profile');
 		}
 
+		$view->set('me', $this->me);
+
+		$this->template->content = $view;
+	}
+
+	public function action_search_api()
+	{
 		$users = DB::select('*')
 			->from('users')
 			->where('user_name', '<>', '')
@@ -69,11 +76,9 @@ class Controller_Yoshioka extends Controller_Base
 
 		//Debug::dump(DB::last_query());
 
-		$view->set('users', $users);
+		header('content-type: application/json; charset=utf-8');
 
-		$view->set('me', $this->me);
-
-		$this->template->content = $view;
+		return Format::forge($users)->to_json();
 	}
 
 	public function action_profile()

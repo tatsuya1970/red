@@ -9,23 +9,41 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($users as $user): ?>
-			<tr>
-				<th scope="row"><?php echo $user['user_name']; ?></th>
-				<td class="<?php echo ($user['user_age'] == $me['user_age'] ? 'success' : ''); ?>"><?php echo ($user['user_age'] == $me['user_age'] ? $user['user_age'] : '-'); ?></td>
-				<td class="<?php echo ($user['user_shusshin'] == $me['user_shusshin'] ? 'success' : ''); ?>"><?php echo ($user['user_shusshin'] == $me['user_shusshin'] ? $user['user_shusshin'] : '-'); ?></td>
-				<td class="<?php echo ($user['user_gakureki'] == $me['user_gakureki'] ? 'success' : ''); ?>"><?php echo ($user['user_gakureki'] == $me['user_gakureki'] ? $user['user_gakureki'] : '-'); ?></td>
-				<td class="<?php echo ($user['user_shigoto'] == $me['user_shigoto'] ? 'success' : ''); ?>"><?php echo ($user['user_shigoto'] == $me['user_shigoto'] ? $user['user_shigoto'] : '-'); ?></td>
-			</tr>
-		<?php endforeach; ?>
+		<tr v-for="user in users">
+			<th scope="row">{{ user.user_name }}</th>
+			<td v-bind:class="{ 'success': (user.user_age == '<?php echo $me['user_age']; ?>') }">{{ user.user_age }}</td>
+			<td v-bind:class="{ 'success': (user.user_shusshin == '<?php echo $me['user_shusshin']; ?>') }">{{ user.user_shusshin }}</td>
+			<td v-bind:class="{ 'success': (user.user_gakureki == '<?php echo $me['user_gakureki']; ?>') }">{{ user.user_gakureki }}</td>
+			<td v-bind:class="{ 'success': (user.user_shigoto == '<?php echo $me['user_shigoto']; ?>') }">{{ user.user_shigoto }}</td>
+		</tr>
 	</tbody>
 </table>
 <script>
-/*
 $(function() {
-	window.setTimeout(function() {
-		window.location.reload();
-	}, 3000);
+	var app = new Vue({
+		el: '#search-resuit',
+		data: {
+			users: []
+		},
+		methods: {
+			reload: function() {
+				var _self = this;
+				$.ajax({
+					type: 'GET',
+					url: '<?php echo Uri::create('search_api'); ?>',
+					dataType: 'json'
+				}).done(function(data) {
+					_self.users = data;
+				});
+			}
+		},
+		ready: function() {
+			var _self = this;
+			_self.reload();
+			window.setTimeout(function() {
+				_self.reload();
+			}, 3000);
+		}
+	});
 });
-*/
 </script>
