@@ -15,6 +15,7 @@
 			<td v-bind:class="{ 'success': (user.user_shusshin == '<?php echo $me['user_shusshin']; ?>') }">{{ (user.user_shusshin == '<?php echo $me['user_shusshin']; ?>' ? user.user_shusshin : '-') }}</td>
 			<td v-bind:class="{ 'success': (user.user_gakureki == '<?php echo $me['user_gakureki']; ?>') }">{{ (user.user_gakureki == '<?php echo $me['user_gakureki']; ?>' ? user.user_gakureki : '-') }}</td>
 			<td v-bind:class="{ 'success': (user.user_shigoto == '<?php echo $me['user_shigoto']; ?>') }">{{ (user.user_shigoto == '<?php echo $me['user_shigoto']; ?>' ? user.user_shigoto : '-') }}</td>
+			<td v-bind:class="{ 'success': (user.user_shumi == '<?php echo $me['user_shumi']; ?>') }">{{ (user.user_shumi == '<?php echo $me['user_shumi']; ?>' ? user.user_shumi : '-') }}</td>
 		</tr>
 	</tbody>
 </table>
@@ -42,7 +43,7 @@ $(function() {
 			_self.reload();
 			window.setInterval(function() {
 				_self.reload();
-			}, 2000);
+			}, 5000);
 		}
 	});
 });

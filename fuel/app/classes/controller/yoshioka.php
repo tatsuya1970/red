@@ -15,6 +15,7 @@ class Controller_Yoshioka extends Controller_Base
 				'user_shusshin' => '',
 				'user_gakureki' => '',
 				'user_shigoto' => '',
+				'user_shumi' => '',
 				'created_at' => strftime('%F %T', $_SERVER['REQUEST_TIME']),
 				'updated_at' => strftime('%F %T', $_SERVER['REQUEST_TIME']),
 			);
@@ -70,6 +71,7 @@ class Controller_Yoshioka extends Controller_Base
 				->or_where('user_shusshin', '=', $this->me['user_shusshin'])
 				->or_where('user_gakureki', '=', $this->me['user_gakureki'])
 				->or_where('user_shigoto', '=', $this->me['user_shigoto'])
+				->or_where('user_shumi', '=', $this->me['user_shumi'])
 			->and_where_close()
 			->execute()
 			->as_array();
@@ -104,6 +106,7 @@ class Controller_Yoshioka extends Controller_Base
 			'user_shusshin' => Input::post('user_shusshin'),
 			'user_gakureki' => Input::post('user_gakureki'),
 			'user_shigoto' => Input::post('user_shigoto'),
+			'user_shumi' => Input::post('user_shumi'),
 			'updated_at' => strftime('%F %T', $_SERVER['REQUEST_TIME']),
 		);
 		DB::update('users')->set($data)->where('id', $this->me['id'])->execute();
