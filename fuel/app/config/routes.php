@@ -5,5 +5,7 @@ return array(
 	
 	'hello(/:name)?' => array('welcome/hello', 'name' => 'hello'),
 	'search' => 'yoshioka/search',
+	'profile' => 'yoshioka/profile',
+	'profile_edit' => 'yoshioka/profile_edit',
 	'logout' => 'yoshioka/logout',
 );
